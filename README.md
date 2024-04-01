@@ -1,2 +1,2 @@
 # Kahuil
-Libraries for TEC CEM robot Kahuil
+Libraries to move TEC CEM Kahuil's robotic arm.
