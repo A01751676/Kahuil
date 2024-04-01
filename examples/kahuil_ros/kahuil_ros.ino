@@ -1,9 +1,11 @@
 #include "kahuil.h"
+#include "kahuil_motors.h"
 #include <ros.h>
 #include <sensor_msgs/Joy.h>
 #include <std_msgs/Float32.h>
 
 Kahuil brazo;
+Kahuil_Motors motor;
 
 // HANDLER DEL NODO DE ROS Y PUBLICADOR --------------------------------------------------------------------------
 ros::NodeHandle  nh;
@@ -66,7 +68,14 @@ void moveKahuil(const sensor_msgs::Joy& control){
     stepZ = control.axes[1]; // joy izquierdo (up -> , down ->)
 
     brazo.updatePosition(1,1,1,stepX,stepY,stepZ);
+    
+    // esto es para mover los motores del brazo 
+    float rad[6] = {brazo.getQ1(),brazo.getQ2(),brazo.getQ3(),brazo.getQ4(),brazo.getQ5(),0};
+    int b1, b2, b3, b4, b5, b6 = motor.radiansToBits(rad);
+    int bits[6] = {b1, b2, b3, b4, b5, b6};
+    motor.setPos(bits, 100);
 
+    // recuperar pos actual en la clase
     x_position.data = stepX;//brazo.getPosX();
     y_position.data = stepY; //brazo.getPosX();
     z_position.data = stepZ;//brazo.getPosX();
@@ -88,6 +97,9 @@ ros::Subscriber<sensor_msgs::Joy> sub("joy", &moveKahuil);
 
 void setup() {
   // put your setup code here, to run once:
+  motor.startComunication();
+  motor.torque(1);
+
   nh.initNode();
   nh.subscribe(sub);
   nh.advertise(chatter1);
