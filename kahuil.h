@@ -28,7 +28,7 @@ class Kahuil
 
         void forwardKinematics(float q1, float q2, float q3, float q4, float q5);
         void inverseKinematics(float x, float y, float z, float beta);
-        float updatePosition(int enX, int enY, int enZ, float step);
+        float updatePosition(int enX, int enY, int enZ, float stepX, float mstepY, float mstepZ);
 
 };
 #endif

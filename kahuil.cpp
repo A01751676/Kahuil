@@ -97,12 +97,12 @@ void Kahuil::inverseKinematics(float x, float y, float z, float beta){
     //return q1, q2, q3, q4, q5;
 };
 
-float Kahuil::updatePosition(int enX, int enY, int enZ, float mstep){
+float Kahuil::updatePosition(int enX, int enY, int enZ, float mstepX, float mstepY, float mstepZ){
 
     // upadte current gripper position
-    float pos_X = this->posX + enX*mstep;
-    float pos_Y = this->posY + enY*mstep;
-    float pos_Z = this->posZ + enZ*mstep;
+    float pos_X = this->posX + enX*mstepX;
+    float pos_Y = this->posY + enY*mstepY;
+    float pos_Z = this->posZ + enZ*mstepZ;
 
     // generate inverse kinematics for position
     inverseKinematics(pos_X, pos_Y, pos_Z, this->beta);
