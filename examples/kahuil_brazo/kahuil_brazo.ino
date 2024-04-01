@@ -19,7 +19,7 @@ void setup() {
 void loop() {
   // PONER AQUI LOS IFS CON LOS JOYSTICKS 
 
-  //brazo.updatePosition(1,0,0,-0.5);
+  //brazo.updatePosition(1,0,0,-0.5,0,0);
   
   Serial.print("pos X :"); Serial.print(brazo.getPosX());
   Serial.print("pos Y :"); Serial.print(brazo.getPosY());
